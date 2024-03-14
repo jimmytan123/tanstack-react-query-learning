@@ -9,6 +9,8 @@ export default function NewEventsSection() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['events'],
     queryFn: fetchEvents,
+    staleTime: 5000, // Specify how long the results of a query can be considered fresh. Default is 0;
+    // gcTime: 1000 // Specify how long the results of a query should be cached. Default is 5 mins
   });
 
   let content;
