@@ -1,3 +1,7 @@
+import { QueryClient } from '@tanstack/react-query';
+
+export const queryClient = new QueryClient();
+
 // Helper function to GET request fetch events, throw error if occurs
 export async function fetchEvents({ signal, searchTerm }) {
   let url = 'http://localhost:3000/events';
