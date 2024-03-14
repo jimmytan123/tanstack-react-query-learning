@@ -10,8 +10,8 @@ export default function FindEventSection() {
   const [searchTerm, setSearchTerm] = useState();
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['events', { search: searchTerm }],
-    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }), // Passing the provided signal into the help function for Fetch API aborting
+    queryKey: ['events', { searchTerm: searchTerm }],
+    queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }), // Passing the provided signal into the help function for Fetch API aborting
     enabled: searchTerm !== undefined, // Control whether to send the request
   });
 

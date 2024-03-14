@@ -3,13 +3,19 @@ import { QueryClient } from '@tanstack/react-query';
 export const queryClient = new QueryClient();
 
 // Helper function to GET request fetch events, throw error if occurs
-export async function fetchEvents({ signal, searchTerm }) {
+export async function fetchEvents({ signal, searchTerm, max }) {
   let url = 'http://localhost:3000/events';
 
   // Construct API URL dynamically
-  if (searchTerm) {
+
+  if (searchTerm && max) {
+    url += '?search=' + searchTerm + '&max=' + max;
+  } else if (searchTerm) {
     url += '?search=' + searchTerm;
+  } else if (max) {
+    url += '?max=' + max;
   }
+
   const response = await fetch(url, { signal: signal });
 
   if (!response.ok) {
